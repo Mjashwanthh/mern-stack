@@ -6,7 +6,7 @@ app.get("/", function(req, res){
 	res.sendFile(__dirname+"/index.html")
 });
 app.get("/resume", function(req, res){
-	res.sendFile(__dirname+"resume.html")
+	res.sendFile(__dirname+"/resume.html")
 });
 
 app.listen(port, function(){
