@@ -21,19 +21,42 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	}
 	else {
 		console.log("DB connected");
-		userLib.getAllUsers(function(err,res){
-		// TODO : Do not create user if atleast 1 user exist 
-			if(res.length == 0) {
-				userLib.creatFirstUser(function(err,res){
-
-					if(err) {
-						console.error(err);
-					}
-					else{
-						console.log(res);
-					}
-				});
+		userLib.creatUser({
+			userName : "Jashwanth",
+			yearOfGraduation : 2030
+		},function(err,result){
+			if(err) console.error(err);
+			else console.log(result);
+		});
+		
+		userLib.creatUser({userName : "shakthimaan",yearOfGraduation},function(err,result){
+			if(err) {
+				console.error(err);
 			}
+			else {
+				console.log(result);
+			}
+		});
+
+		userLib.updateUser(function(err,result){
+			if(err) {
+				console.error(err);
+			}
+			else {
+				console.log(result);
+			}
+		});
+			userLib.deleteUser("Jashwanth",function(err,result) {
+				if(err) console.error(err);
+				else console.log(result);
+			});
+		userLib.getUserByFilter({userName:"Jashwanth"},function(err,result){
+			if(err) console.error(err);
+			else console.log(result);
+		});
+		userLib.getAllUsers(function(err,result){
+			if(err) console.error(err);
+			else console.log(result);
 		});
 		app.listen(port, function(){
 			console.log("Server running on http://localhost:"+port);
