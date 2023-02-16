@@ -21,13 +21,18 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 	}
 	else {
 		console.log("DB connected");
-        // TODO : Do not create user if atleast 1 user exist in the table then dont create
-		userLib.creatFirstUser(function(err,res){
-			if(err) {
-				//console.error(err);
-			}
-			else{
-				console.log(res);
+		userLib.getAllUsers(function(err,res){
+		// TODO : Do not create user if atleast 1 user exist 
+			if(res.length == 0) {
+				userLib.creatFirstUser(function(err,res){
+
+					if(err) {
+						console.error(err);
+					}
+					else{
+						console.log(res);
+					}
+				});
 			}
 		});
 		app.listen(port, function(){
