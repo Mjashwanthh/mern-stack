@@ -5,6 +5,7 @@ document.getElementById("toggle").onclick = function changeValues() {
     var c = "public/images/virat_kohli.jpg";
     var d = "public/images/jash.png"
     if(count % 2 == 1) {
+        
         document.getElementById("name").innerHTML = "Virat";
         document.getElementById("designation").innerHTML = "Cricketer";
         changeimage(d);
