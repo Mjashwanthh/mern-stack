@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <center><div class="card">
+        <img src="public/images/jash.png" alt="Avatar" style="width:100%" id="userImage">
+        <div class="container">
+            <h4 id="userTitle"><b>Jashwanth</b></h4>
+          <p id="userDesignation">Student & Developer</p>
+        </div>
+      </div></center>
+      <button class = "toggle" onclick="toggleUser()">Toggole</button>
+      <script>
+            const userOne = {
+            name : "Jashwanth",
+            designation : "Sniper",
+            image : "public/images/jash.png",
+        }
+        const userTwo = {
+            name : "Virat",
+            designation : "Vilian",
+            image : "public/images/virat_kohli.jpg",
+        }
+
+        let currentIsMicheal = true;
+        let currentUser = userOne;
+
+        let userTitle = document.getElementById("userTitle");
+        let userImage = document.getElementById("userImage");
+        let userDesignation = document.getElementById("userDesignation");
+
+
+        let toggleUser = function() {
+            if(currentIsMicheal){
+                currentUser = userTwo;
+                currentIsMicheal = false;
+            }
+            else{
+                currentUser = userOne;
+                currentIsMicheal = true;
+            }
+
+            userTitle.innerHTML = currentUser.name;
+            userDesignation.innerHTML = currentUser.designation;
+            userImage.src = currentUser.image;
+        }
+
+    </script>
+
+</body>
+</html>

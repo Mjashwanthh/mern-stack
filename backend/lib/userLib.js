@@ -2,7 +2,7 @@ const userModel = require("../models/userModel");
 
 module.exports.getAllUsers = async function(callBack) {
     try{
-        var users = await userModel.find({isDeleted : true});
+        var users = await userModel.find({isDeleted : false});
         callBack(null,users);
     }
     catch(err){
@@ -38,19 +38,19 @@ module.exports.creatUser = async function(user,callBack) {
     }
 }
 
-module.exports.updateUser = async function(userName,data,callBack) {
-    try {
-        var query = {
-            userName : "Jashwanth"
-        };
+// module.exports.updateUser = async function(userName,data,callBack) {
+//     try {
+//         var query = {
+//             userName : "Jashwanth"
+//         };
 
-        var result = await userModel.updateOne(query, data);
-        callBack(null,result);
-    }
-    catch(err){
-        callBack(err,null);
-    }
-}
+//         var result = await userModel.updateOne(query, data);
+//         callBack(null,result);
+//     }
+//     catch(err){
+//         callBack(err,null);
+//     }
+// }
 
 module.exports.deleteUser = async function(userName,callBack) {
     try {

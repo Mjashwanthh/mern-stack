@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 			else console.log(result);
 		});
 		
-		userLib.creatUser({userName : "shakthimaan",yearOfGraduation},function(err,result){
+		userLib.creatUser({userName : "shakthimaan",yearOfGraduation : 2030},function(err,result){
 			if(err) {
 				console.error(err);
 			}
@@ -38,14 +38,14 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING,{},function(err){
 			}
 		});
 
-		userLib.updateUser(function(err,result){
-			if(err) {
-				console.error(err);
-			}
-			else {
-				console.log(result);
-			}
-		});
+		// userLib.updateUser(function(err,result){
+		// 	if(err) {
+		// 		console.error(err);
+		// 	}
+		// 	else {
+		// 		console.log(result);
+		// 	}
+		// });
 			userLib.deleteUser("Jashwanth",function(err,result) {
 				if(err) console.error(err);
 				else console.log(result);
