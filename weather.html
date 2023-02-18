@@ -71,7 +71,7 @@
     <div id = "cont" class="container main-container">
         
         <nav>
-            <img src = "public/images/clear.jpg" alt = "theme" class = "icon">
+            <img src = "./public/images/clear.jpg" alt = "theme" class = "icon">
             
         </nav>
         <br></br>
@@ -91,7 +91,7 @@
                 <h6 id = "date"> Saturday,18th Feb 2023</h6>
             </div>
             
-            <img id = "image" src="public/images/clouds.jpg" class="card-img-top" alt="weather image">
+            <img id = "image" src="./public/images/clouds.jpg" class="card-img-top" alt="weather image">
             
             <div id = "cbody" class="card-body">
                 <h6 id = "temp" class = "display-4 font-weight-bold text-center"> 13°C </h6>
@@ -193,39 +193,39 @@
         function manageImage(weatherType) {
             if (weatherType === 'Clear') {
 
-                return "public/images/clear.jpg";
+                return "./public/images/clear.jpg";
 
             } else if (weatherType === 'Smoke') {
 
-                return "public/images/smoke.jpg";
+                return "./public/images/smoke.jpg";
 
             } else if (weatherType === 'Haze') {
 
-                return "public/images/haze.jpg";
+                return "./public/images/haze.jpg";
 
             } else if (weatherType === 'Rain') {
 
-                return "public/images/rain.jpg";
+                return "./public/images/rain.jpg";
 
             } else if (weatherType === 'Snow') {
 
-                return "public/images/snow.jpg";
+                return "./public/images/snow.jpg";
 
             } else if (weatherType === 'Thunderstorm') {
 
-                return "public/images/thunderstorm.jpg";
+                return "./public/images/thunderstorm.jpg";
 
             } else if (weatherType === 'Mist') {
 
-                return "public/images/mist.jpg";
+                return "./public/images/mist.jpg";
 
             } else if (weatherType === 'Clouds') {
 
-                return "public/images/clouds.jpg";
+                return "./public/images/clouds.jpg";
 
             }
             else {
-                return "public/images/clear.jpg";
+                return "./public/images/clear.jpg";
             }
         }
 
