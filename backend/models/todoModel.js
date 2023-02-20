@@ -1,17 +1,10 @@
-const mongoose =   require("mongoose");
+const mongoose = require("mongoose");
 
-// const app = express();
-// const port = process.env.PORT || 9030;
-
-
-// app.listen(port,function(){
-//     console.log("Server running on ")
-// });
-const userSchema1 = new mongoose.Schema({
-    title : {type : String},
-    isCompleted : {type : Boolean},
-    isDeleted : {type : Boolean},
-    createdAt : {type : Date}
+const todoSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    isCompleted: {type: Boolean, default: false},
+    isDeleted: {type: Boolean, default: false},
+    createdAt: {type: Date, default: Date.now}
 });
 
-model.exports = mongoose.model("user",userSchema1);
+module.exports = mongoose.model("todo",todoSchema);
