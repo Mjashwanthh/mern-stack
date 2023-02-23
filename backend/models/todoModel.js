@@ -7,4 +7,4 @@ const todoSchema = new mongoose.Schema({
 });
 
 // module.exports = mongoose.model("todo",todoSchema);
-export default todoModel = mongoose.model("todo",todoSchema); //same as above line
+export default mongoose.model("todo",todoSchema); //same as above line

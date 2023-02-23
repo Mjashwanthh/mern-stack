@@ -71,23 +71,23 @@ app.delete(("/api/todos/:todoid"),function(req,res){
 	});
 });
 app.get("/", function(req, res){
-	res.sendFile(__dirname+"/index.html");
+	res.sendFile(process.cwd()+"/index.html");
 });
 
 app.get("/resume", function(req, res){
-	res.sendFile(__dirname+"/resume.html");
+	res.sendFile(process.cwd()+"/resume.html");
 });
 
 app.get("/card", function(req, res){
-	res.sendFile(__dirname+"/card.html");
+	res.sendFile(process.cwd()+"/card/card.html");
 });
 
 app.get("/weather", function(req, res){
-	res.sendFile(__dirname+"/weather.html");
+	res.sendFile(process.cwd()+"/weather.html");
 });
 
 app.get("/todo", function(req, res){
-	res.sendFile(__dirname+"/frontend/html/todo.html");
+	res.sendFile(process.cwd()+"/frontend/html/todo.html");
 });
 
 mongoose.set('strictQuery', true);

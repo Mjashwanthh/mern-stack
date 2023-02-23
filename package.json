@@ -1,6 +1,6 @@
 {
   "name": "mern-web-dev",
-  "type" : "module",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,8 +12,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.9.1",
-    "nodemon": "^2.0.20"
+    "mongoose": "^6.9.1"
   },
   "devDependencies": {
     "tailwindcss": "^3.2.7"
