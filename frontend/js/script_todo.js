@@ -1,6 +1,9 @@
 console.log("Hello From JS");
 document.getElementById("loader").style.display = "block";
 
+let todoCount = 0;
+let completedCount = 0;
+let deletedCount = 0;
 const inputBox = document.getElementById("inputBox");
 inputBox.addEventListener("keydown", function(event){
     console.log(inputBox.value);
@@ -8,21 +11,45 @@ inputBox.addEventListener("keydown", function(event){
         createTodo(inputBox.value);
     }
 });
+async function createTodo(text){
+    // if text is null or undefined use inputBox.value
+    const todoText = text ?? inputBox.value;
+    if(!todoText){
+        alert("Please Enter Something!!");
+        return;
+    }
+    let reqTitle = {
+        title: todoText,
+    };
+    try{
+        let value = await fetch("/api/todos",{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(reqTitle),
+        });
+        value = await value.json();
+        console.log("success", value);
+        getAllTodos();
+    }
+    catch(err){
+        console.log(err);
+    }   
+    finally{
+        inputBox.value = "";
+    } 
+}
 
 function plus() {
     const inputBox = document.getElementById("inputBox");
     createTodo(inputBox.value);
 }
 
-async function createTodo(text){
-    // if text is null or undefined use inputBox.value
-    await fetch("/api/todos", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({title: text})});
-    await getAllTodos();
-}
+
 
 
 async function getAllTodos(){
-    const todoresult = await fetch("/api/todos");
+    try{
+        const todoresult = await fetch("/api/todos");
     const todos = await todoresult.json();
     // alert(JSON.stringify(todolist));
     const todoList = document.getElementById("todoList");
@@ -76,9 +103,107 @@ async function getAllTodos(){
 
             todoList.appendChild(listItem);
         })
+    }
+    catch(err) {
+        console.error(err);
+    }
 }
 
-getAllTodos();
+//getAllTodos();
+
+async function deleteTodo(id) {
+    try {
+        await fetch(`/api/todos/${id}`, {
+            method: "DELETE",
+        })
+        getAllDeletedTodos();
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getAllCompletedTodos() {
+    try {
+
+        let completedTodos = await fetch("/api/todos/completed");
+        completedTodos = await completedTodos.json();
+        const completedTodosList = document.getElementById("completedTodosList");
+        completedTodosList.innerHTML = null
+        completedCount = completedTodos.data.length
+        document.getElementById("completedCount").innerHTML = completedCount;
+        completedTodos.data.forEach((el, index) => {
+            let listItem = document.createElement("li")
+            listItem.classList.add("list-group-item");
+            let textNode = document.createTextNode(el.title);
+            listItem.appendChild(textNode);
+            listItem.classList.add("text-center")
+            completedTodosList.appendChild(listItem);
+        })
+
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function getAllDeletedTodos() {
+    try {
+
+        let deletedTodos = await fetch("/api/todos/deleted")
+        deletedTodos = await deletedTodos.json();
+        const deletedTodosList = document.getElementById("deletedTodosList");
+        deletedTodosList.innerHTML = null;
+        deletedCount = deletedTodos.data.length;
+        document.getElementById("deletedCount").innerHTML = deletedCount;
+        deletedTodos.data.forEach((el, index) => {
+            let listItem = document.createElement("li")
+            listItem.classList.add("list-group-item");
+            let textNode = document.createTextNode(el.title);
+            listItem.appendChild(textNode);
+            listItem.classList.add("text-center")
+            deletedTodosList.appendChild(listItem);
+            
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+async function setChecked(id) {
+    const item = document.querySelector(`[data-name="${id}"]`);
+    let isCrossed  = item.classList.contains("crossed");
+    if (isCrossed) {
+        
+        item.classList.remove("crossed");
+        let data = {
+            isCompleted : false
+        }
+        await fetch(`/api/todos/${id}`, {
+            method: "PUT",
+            body : JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json",
+            },
+        })
+        getAllCompletedTodos();
+
+    } else {
+        item.classList.add("crossed")
+        let data = {
+            isCompleted : true
+        }
+        await fetch(`/api/todos/${id}`, {
+            method: "PUT",
+            body : JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json",
+            },
+        })
+        getAllCompletedTodos();
+    }
+    
+}
 
 fetch("/api/todos")
     .then(function(response){

@@ -30,6 +30,25 @@ export const getAllTodos = async function(callback){
         callback(err,null);
     }
 }
+export const getAllCompletedTodos = async function(callback){
+    try{
+        var todos = await todoModel.find({isCompleted: true,isDeleted: false});
+        callback(null,todos);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
+
+export const getAllDeletedTodos = async function(callback){
+    try{
+        var todos = await todoModel.find({isDeleted: true});
+        callback(null,todos);
+    }
+    catch(err){
+        callback(err,null);
+    }
+}
 
 export const getTodosByQuery = async function(query,callback){
     try{
